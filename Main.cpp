@@ -4,9 +4,9 @@ using namespace std;
 
 int main()
 {
-  string expr;
+  char expr[100];
   cout<<"Enter the expression to evaluate:\n"; 
-  cin>>expr;
+  cin.getline(expr,100);
   int result = solve(expr);
   cout<<"Ans is"<<result;
   return 0;

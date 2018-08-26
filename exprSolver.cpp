@@ -8,11 +8,11 @@ using namespace std;
 
 int solve(char* expr)
 {
+
 	opStack* oper = NULL;
 	valStack* val = NULL;
 	int i;
 	int len = exprLen(expr);
-	cout<<"about to leave";
 	int insert_res = 0;
 	for(i = 0; i < len; i++)
 	{
@@ -104,6 +104,7 @@ int exprLen(char *expr)
 	while(expr[i] != '\0')
 	{
 		len++;
+		i++;
 	}
 	return len;
 }
