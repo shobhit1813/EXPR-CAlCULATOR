@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-  char expr[100];
+  string expr;
   cout<<"Enter the expression to evaluate:\n"; 
   cin>>expr;
   int result = solve(expr);

@@ -12,6 +12,7 @@ int solve(char* expr)
 	valStack* val = NULL;
 	int i;
 	int len = exprLen(expr);
+	cout<<"about to leave";
 	int insert_res = 0;
 	for(i = 0; i < len; i++)
 	{
