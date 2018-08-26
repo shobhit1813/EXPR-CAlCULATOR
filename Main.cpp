@@ -1,5 +1,5 @@
 #include<iostream>
-#include "exprSolver.c";
+#include "exprSolver.cpp"
 using namespace std;
 
 int main()
@@ -8,5 +8,6 @@ int main()
   cout<<"Enter the expression to evaluate:\n"; 
   cin>>expr;
   int result = solve(expr);
+  cout<<"Ans is"<<result;
   return 0;
 }

@@ -1,19 +1,74 @@
 #include<iostream>
-#include "Stack.h";
+#include<climits>
+#include "Stack.h"
 using namespace std;
 
-sturct node
-{
-	char data;
-	struct node* next;
-};
 
-void push(struct node* top, char c)
+void oppush(opStack* top, char c)
 {
-	struct node* newnode = new node;
+	opStack* newnode = new node1;
 	newnode->data = c;
-	if(top == NULL)
+	newnode->next = NULL;
+	if(top == NULL) top = newnode;
+	else
 	{
-
+		newnode->next = top;
+		top = newnode;
 	}
+	return;
+}
+
+int optop(opStack* head)
+{
+	return head->data;
+}
+
+int oppop(opStack* top)
+{
+	if(opisEmpty(top)) return INT_MIN;
+	opStack *tmp = top;
+	top = top->next;
+	int popped = tmp->data;
+	free(tmp);
+	return popped;
+}
+
+bool opisEmpty(opStack* top)
+{
+	return !top;
+}
+
+
+void valpush(valStack* top, char c)
+{
+	valStack* newnode = new node2;
+	newnode->data = c;
+	newnode->next = NULL;
+	if(top == NULL) top = newnode;
+	else
+	{
+		newnode->next = top;
+		top = newnode;
+	}
+	return;
+}
+
+int valtop(valStack* head)
+{
+	return head->data;
+}
+
+int valpop(valStack* top)
+{
+	if(valisEmpty(top)) return INT_MIN;
+	valStack* tmp = top;
+	top = top->next;
+	int popped = tmp->data;
+	free(tmp);
+	return popped;
+}
+
+bool valisEmpty(valStack* top)
+{
+	return !top;
 }
