@@ -16,64 +16,72 @@ int solve(char* expr)
 	int insert_res = 0;
 	for(i = 0; i < len; i++)
 	{
-		  if(expr[i] == '(') oppush(oper,expr[i]);	
-		  else if(isdigit(expr[i]))
-		  {
-		  	int value = 0;
-		  	//if there are more than one digit
-		  	while(i < len && isdigit(expr[i]))
-		  	{
-		  		value = value * 10 + (expr[i] - '0');
-		  		i++;
-		  	}
-		  	valpush(val,value);
-		  }
-		  else if( expr[i] == ')')
-		  {
-			while(!opisEmpty(oper)&& expr[i] != '(')
+		if(expr[i] == ' ') continue;
+		else if(isdigit(expr[i]))	
+		{
+			int value = 0;
+			while(i < len && isdigit(expr[i]))
 			{
-			  int val1 = valtop(val);
-			  valpop(val);
-			  int val2 = valtop(val);
-			  valpop(val);
-			  char op = optop(oper);
-			  oppop(oper);
-			  insert_res = calculate(val1,val2,op);
-			  valpush(val,insert_res);
+				value = value * 10 + (expr[i] - '0');
+				i++;
 			}
-		  }
-		  else if(expr[i] == ' ') continue;
-		  else 
-		  {
-		  	if(expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || expr[i] == '/' || expr[i] == '%' || expr[i] == '^'  || expr[i] == '!') 
-		  	{
-		  		while(!opisEmpty(oper) && preceed(optop(oper)) >= preceed(expr[i]))
-		  		{
-		  			int val1 = valtop(val);
-					  valpop(val);
-					  int val2 = valtop(val);
-					  valpop(val);
-					  char op = optop(oper);
-					  oppop(oper);
-					  insert_res = calculate(val1,val2,op);
-					  valpush(val,insert_res);
-				  		}
-		  	}
-		  
-		  }
+			valpush(val, value);
+		}
+		else if(expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || expr[i] == '/' || expr[i] == '^' || expr[i] == '%' )
+		{
+			while( !opisEmpty(oper) &&  preceed(optop(oper)) >= preceed(expr[i]) )
+			{
+				int val1 = valtop(val);
+				valpop(val);
+
+				int val2 = valtop(val);
+				valpop(val);
+
+
+				char op = optop(oper);
+				oppop(oper);
+				valpush(val, calculate(val1, val2, op));
+			}
+			oppush(oper, expr[i]);
+		}	
+		else if(expr[i] =='(') oppush(oper, expr[i]);
+		else if(expr[i] == ')')
+		{
+			while(!opisEmpty(oper) && optop(oper) != '(')
+			{
+				int val1 = valtop(val);
+				valpop(val);
+
+				int val2 = valtop(val);
+				valpop(val);
+
+
+				char op = optop(oper);
+				oppop(oper);
+
+				valpush(val, calculate(val1, val2, op));
+
+			}
+			  oppop(oper);
+		}
+
 	}
+
 	while(!opisEmpty(oper))
 	{
+
 		int val1 = valtop(val);
-			  valpop(val);
-			  int val2 = valtop(val);
-			  valpop(val);
-			  char op = optop(oper);
-			  oppop(oper);
-			  insert_res = calculate(val1,val2,op);
-			  valpush(val,insert_res);
+		valpop(val);
+
+		int val2 = valtop(val);
+		valpop(val);
+
+
+		char op = optop(oper);
+		oppop(oper);
+		valpush(val, calculate(val1, val2, op));
 	}
-	return insert_res;
+  return valtop(val);
 }
 
 int calculate(int v1, int v2, char op)
