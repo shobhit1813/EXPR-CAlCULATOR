@@ -41,6 +41,7 @@ bool opisEmpty(opStack* top)
 
 void valpush(valStack* top, char c)
 {
+	cout<<"pushed"<<endl;
 	valStack* newnode = new node2;
 	newnode->data = c;
 	newnode->next = NULL;

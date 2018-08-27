@@ -79,8 +79,10 @@ int solve(char* expr)
 
 		char op = optop(oper);
 		oppop(oper);
+		cout<<"end "<<val1<<" "<<val2<<endl;
 		valpush(val, calculate(val1, val2, op));
 	}
+
   return valtop(val);
 }
 
