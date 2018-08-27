@@ -15,11 +15,11 @@ typedef struct node2
 }valStack;
 
 int optop(struct node1*);
-int oppop(struct node1*);
-void oppush(struct node1*, char);
+int oppop(struct node1**);
+void oppush(struct node1**, char);
 bool opisEmpty(struct node1*);
 
 int valtop(struct node2*);
-int valpop(struct node2*);
-void valpush(struct node2*, char);
+int valpop(struct node2**);
+void valpush(struct node2**, char);
 bool valisEmpty(struct node2*);

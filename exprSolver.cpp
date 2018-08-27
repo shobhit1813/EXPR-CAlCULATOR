@@ -25,44 +25,44 @@ int solve(char* expr)
 				value = value * 10 + (expr[i] - '0');
 				i++;
 			}
-			valpush(val, value);
+			valpush(&val, value);
 		}
 		else if(expr[i] == '+' || expr[i] == '-' || expr[i] == '*' || expr[i] == '/' || expr[i] == '^' || expr[i] == '%' )
 		{
 			while( !opisEmpty(oper) &&  preceed(optop(oper)) >= preceed(expr[i]) )
 			{
 				int val1 = valtop(val);
-				valpop(val);
+				valpop(&val);
 
 				int val2 = valtop(val);
-				valpop(val);
+				valpop(&val);
 
 
 				char op = optop(oper);
-				oppop(oper);
-				valpush(val, calculate(val1, val2, op));
+				oppop(&oper);
+				valpush(&val, calculate(val1, val2, op));
 			}
-			oppush(oper, expr[i]);
+			oppush(&oper, expr[i]);
 		}	
-		else if(expr[i] =='(') oppush(oper, expr[i]);
+		else if(expr[i] =='(') oppush(&oper, expr[i]);
 		else if(expr[i] == ')')
 		{
 			while(!opisEmpty(oper) && optop(oper) != '(')
 			{
 				int val1 = valtop(val);
-				valpop(val);
+				valpop(&val);
 
 				int val2 = valtop(val);
-				valpop(val);
+				valpop(&val);
 
 
 				char op = optop(oper);
-				oppop(oper);
+				oppop(&oper);
 
-				valpush(val, calculate(val1, val2, op));
+				valpush(&val, calculate(val1, val2, op));
 
 			}
-			  oppop(oper);
+			  oppop(&oper);
 		}
 
 	}
@@ -71,18 +71,16 @@ int solve(char* expr)
 	{
 
 		int val1 = valtop(val);
-		valpop(val);
+		valpop(&val);
 
 		int val2 = valtop(val);
-		valpop(val);
+		valpop(&val);
 
 
 		char op = optop(oper);
-		oppop(oper);
-		cout<<"end "<<val1<<" "<<val2<<endl;
-		valpush(val, calculate(val1, val2, op));
+		oppop(&oper);
+		valpush(&val, calculate(val1, val2, op));
 	}
-
   return valtop(val);
 }
 
