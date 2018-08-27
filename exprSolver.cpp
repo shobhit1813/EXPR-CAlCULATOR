@@ -86,13 +86,14 @@ int solve(char* expr)
 
 int calculate(int v1, int v2, char op)
 {
+	cout<<"operator: "<<op<<endl;
 	switch(op)
 	{
-		case '+': return v1 +  v2;
-		case '-': return v1 -  v2;
-		case '*': return v1 *  v2;
-		case '/': return v1 /  v2;
-		case '%': return v1 %  v2;
+		case '+': return v2 +  v1;
+		case '-': return v2 -  v1;
+		case '*': return v2 *  v1;
+		case '/': return v2 /  v1;
+		case '%': return v2 %  v1;
 		default: return INT_MIN;
 		//case 'sq': return calSqroot()
 	}

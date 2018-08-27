@@ -8,6 +8,6 @@ int main()
   cout<<"Enter the expression to evaluate:\n"; 
   cin.getline(expr,100);
   int result = solve(expr);
-  cout<<"Ans is"<<result;
+  cout<<"Ans is "<<result;
   return 0;
 }
